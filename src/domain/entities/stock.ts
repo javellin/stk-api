@@ -5,3 +5,5 @@ export const stockItemSchema = z.object({
   quantity: z.number(),
   type: z.string(),
 });
+
+export type StockItem = z.infer<typeof stockItemSchema>;

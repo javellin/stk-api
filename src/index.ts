@@ -1,25 +1,7 @@
-import express, { type Application } from 'express';
-import compression from 'compression';
-import { decorateExpressRouter } from 'zod-http-schemas/server';
-import helmet from 'helmet';
-import http from 'http';
-import { handlePostStockItem } from './routes/handlePostStockItem.js';
-import { apiSchema } from './routes/apiSchema.js';
+import * as http from 'http';
+import app from './app';
 
-const app: Application = express();
 const server = http.createServer(app);
-
-app.use(compression());
-app.use(
-  helmet({
-    contentSecurityPolicy: false,
-  }),
-);
-app.use(express.json());
-
-const apiRouter = decorateExpressRouter({ schema: apiSchema });
-
-app.post('/stock', handlePostStockItem);
 
 const PORT = 5000;
 
